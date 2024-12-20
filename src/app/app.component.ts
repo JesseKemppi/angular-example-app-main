@@ -8,5 +8,5 @@ import { MatIconModule } from "@angular/material/icon";
 })
 export class AppComponent {
   title = 'angular-example-app';
-  toolbarText = 'Dev-ops-kurssin harjoitusprojekti';
+  toolbarText = 'Dev-ops-kurssin testi muutos';
 }
