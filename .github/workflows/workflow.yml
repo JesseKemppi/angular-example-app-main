@@ -31,6 +31,11 @@ jobs:
         run: |
           npm install
           npm run build
+
+
+      - name: Run unit tests                  #Tämä on testien ajo steppi, angular projektissa karma/jasmine
+        run: npm test -- --watch=false --browsers=ChromeHeadless 
+          
       - uses: actions/upload-artifact@master
         with:
           name: webpack artifacts
