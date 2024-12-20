@@ -10,7 +10,7 @@
 name: Build and deploy a container to an Azure Web App
 
 env:
-  AZURE_WEBAPP_NAME: devopsi   # set this to your application's name
+  AZURE_WEBAPP_NAME: devopsi   #app:n nimi
 
 on:
   push:
@@ -22,6 +22,21 @@ permissions:
   packages: 'write'
 
 jobs:
+  test:
+    runs-on: ubuntu-latest                     #testi omana jobina. testataan ennen buildia ja julkaisua
+    
+
+    steps:
+      - uses: actions/checkout@v1
+        
+
+      - name: npm install
+        run: npm install
+        
+
+      - name: Run unit tests                                        #yksikkötestit
+        run: npm test -- --watch=false --browsers=ChromeHeadless    #estää chromea käynnistymästä
+        
   build:
     runs-on: ubuntu-latest
 
@@ -32,9 +47,6 @@ jobs:
           npm install
           npm run build
 
-
-      - name: Run unit tests                  #Tämä on testien ajo steppi, angular projektissa karma/jasmine
-        run: npm test -- --watch=false --browsers=ChromeHeadless 
           
       - uses: actions/upload-artifact@master
         with:
